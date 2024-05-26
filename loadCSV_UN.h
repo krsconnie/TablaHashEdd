@@ -36,7 +36,7 @@ void loadCSV_UserName(const std::string& filename, HashTable& hashtable, int max
 			std::getline(ss, since, ',');
 
 			twitterUser user = {uni, std::stoll(userID), userName, std::stoi(numberTweets), std::stoi(friends), std::stoi(followers), since};
-			hashTable.insert(userName, twitterUser);
+			hashtable.insert(userName, user);
 
 			users_added++;
 		}

@@ -4,6 +4,7 @@
 #include <utility>
 #include <math.h>
 #include <vector>
+#include "twitterUsers.h"
 using namespace std;
 
 
@@ -29,61 +30,54 @@ int double_hashing(int k, int n, int i) {
 class HashTable_ID {
 private:
     int size;
-    int* table;
+    vector<pair<long long int, twitterUser>> table;
     int (*hashing_method)(int, int, int);
 
 public:
     HashTable_ID(int size, int (*hashing_method)(int, int, int))
         : size(size), hashing_method(hashing_method) {
-        table = new int[size];
-        for (int i = 0; i < size; i++) {
-            table[i] = -1;
-        }
+        table.resize(size, make_pair(-1, twitterUser())); // Initialize table with pairs of -1 and default constructed twitterUser
     }
 
-    ~HashTable_ID() {
-        delete[] table;
-    }
-
-    void insert(int key) {
+    void insert(long long int key, twitterUser user) {
         int i = 0;
-        while (table[hashing_method(key, size, i)] != -1) {
+        while (table[hashing_method(key, size, i)].first != -1) {
             i++;
         }
-        table[hashing_method(key, size, i)] = key;
+        table[hashing_method(key, size, i)] = make_pair(key, user);
     }
 
-    int* search(int key) {
+    twitterUser* search(long long int key) {
         int i = 0;
-        while (table[hashing_method(key, size, i)] != key && table[hashing_method(key, size, i)] != -1) {
+        while (table[hashing_method(key, size, i)].first != key && table[hashing_method(key, size, i)].first != -1) {
             i++;
         }
-        if (table[hashing_method(key, size, i)] == -1) {
+        if (table[hashing_method(key, size, i)].first == -1) {
             return nullptr; // Si no se encontró el valor
         }
-        return &table[hashing_method(key, size, i)];
+        return &table[hashing_method(key, size, i)].second;
     }
 };
 
 class HashTable_open_ID {
 private:
     int size;
-    vector<list<int>> table;
+    vector<list<pair<long long int, twitterUser>>> table;
 
 public:
     HashTable_open_ID(int size) : size(size) {
         table.resize(size);
     }
 
-    void insert(int key) {
+    void insert(long long int key, twitterUser user) {
         int index = h1(key, size);
-        table[index].push_back(key);
+        table[index].push_back(make_pair(key, user));
     }
 
-    int* search(int key) {
+    twitterUser* search(long long int key) {
         int index = h1(key, size);
-        for (int& k : table[index]) {
-            if (k == key) return &k;
+        for (auto& pair : table[index]) {
+            if (pair.first == key) return &pair.second;
         }
         return nullptr;
     }
