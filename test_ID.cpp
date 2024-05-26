@@ -41,10 +41,10 @@ int main(int argc, char* argv[]) {
 
 
     // Imprimir duraciones
-    cout << "ht_linear;" <<argc<< ";" << duration_linear << endl;
-    cout << "ht_quadratic;" <<argc<< ";" << duration_quadratic << endl;
-    cout << "ht_double;" <<argc<< ";" << duration_double <<endl;
-    cout << "ht_open;" <<argc<< ";" << duration_open <<  endl;
+    cout << "ht_linear;" <<N<< ";" << duration_linear << endl;
+    cout << "ht_quadratic;" <<N<< ";" << duration_quadratic << endl;
+    cout << "ht_double;" <<N<< ";" << duration_double <<endl;
+    cout << "ht_open;" <<N<< ";" << duration_open <<  endl;
 
     return 0;
 }
