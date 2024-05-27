@@ -1,12 +1,12 @@
 #include <iostream>
 #include "HashID.h"
-#include "loadCSV_Id.h"
+#include "loadCSV_ID.h"
 
 int main() {
     HashTable_ID closedHashTable(100, linear_probing);
 
     // Ruta del archivo CSV de prueba
-    std::string filename = "universities_followers1.csv";
+    std::string filename = "universities_followers.csv";
 
     // Llamar a la función de carga con un máximo de 10 usuarios
     loadCSV_Id(filename, closedHashTable, 10);
