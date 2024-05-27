@@ -7,13 +7,13 @@ if exist "experiment_output.csv" (
 )
 
 REM Verificar si test_ID.cpp existe en el directorio actual
-if not exist "test_ID.cpp" (
+if not exist "test_time.cpp" (
     echo Error: test_ID.cpp no se encuentra en el directorio actual.
     exit /b 1
 )
 
 REM Compilar el archivo test_ID.cpp  test_basico
-g++ -o test_ID.exe test_ID.cpp
+g++ -o test_ID.exe test_time.cpp
 if %errorlevel% neq 0 (
     echo Error: la compilación de test_ID.cpp falló.
     exit /b 1
