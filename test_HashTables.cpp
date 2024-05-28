@@ -12,11 +12,8 @@ using namespace std;
 #include <iostream>
 #include "twitterUsers.h" // Include the header file containing the hash table implementations
 
-int main(int argc, char* argv[]) {
-    if (argc != 2) {
-        cerr << "Usage: " << argv[0] << " <numElementos>" << endl;
-        return 1;
-    }
+int main() {
+
     // Create instances of hash tables
     HashTable_ID closedHashTable(100, linear_probing); // Closed addressing hash table using linear probing
     HashTable_open_ID openHashTable(100); // Open addressing hash table

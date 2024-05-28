@@ -6,27 +6,39 @@
 #include <vector>
 #include "twitterUsers.h"
 using namespace std;
+// Safe modulo function
+int safe_modulo(int a, int b) {
+    int result = a % b;
+    return result >= 0 ? result : result + b;
+}
 
-
-
+// Hash functions
 int h1(int k, int n) {
-  return (k*7)%n;
+    return safe_modulo(k * 7939, n);
 }
+
 int h2(int k, int n) {
-  float a = (float)k* 0.6180339887;
-  a -= (int)a;
-  
-  return n*a;
+    float a = (float)k * 0.6180339887;
+    a -= (int)a;
+    return (int)(n * a);
 }
+
+
+
+// Probing methods
 int linear_probing(int k, int n, int i) {
-  return (h1(k, n) + i) % n;
+    return safe_modulo(h1(k, n) + i, n);
 }
+
 int quadratic_probing(int k, int n, int i) {
-  return (h1(k, n) + i + 2*i*i) % n;
+    return safe_modulo(h1(k, n) + i + 2 * i * i, n);
 }
+
 int double_hashing(int k, int n, int i) {
-  return (h1(k, n) + i*(h2(k, n)+1)) % n;
+    return safe_modulo(h1(k, n) + i * (h2(k, n) + 1), n);
 }
+
+// Closed addressing hash table class
 class HashTable_ID {
 private:
     int size;
@@ -36,29 +48,42 @@ private:
 public:
     HashTable_ID(int size, int (*hashing_method)(int, int, int))
         : size(size), hashing_method(hashing_method) {
-        table.resize(size, make_pair(-1, twitterUser())); // Initialize table with pairs of -1 and default constructed twitterUser
+        table.resize(size, make_pair(-1, twitterUser()));
     }
 
     void insert(long long int key, twitterUser user) {
         int i = 0;
-        while (table[hashing_method(key, size, i)].first != -1) {
+        int index = hashing_method(key, size, i);
+        while (table[index].first != -1) {
             i++;
+            index = hashing_method(key, size, i);
+            if (i >= size) {
+                cout << "Hash table is full, cannot insert key: " << key << endl;
+                return;
+            }
         }
-        table[hashing_method(key, size, i)] = make_pair(key, user);
+        table[index] = make_pair(key, user);
     }
 
     twitterUser* search(long long int key) {
         int i = 0;
-        while (table[hashing_method(key, size, i)].first != key && table[hashing_method(key, size, i)].first != -1) {
+        int index = hashing_method(key, size, i);
+        while (table[index].first != key && table[index].first != -1) {
             i++;
+            index = hashing_method(key, size, i);
+            if (i >= size) {
+                cout << "Key: " << key << " not found after full probing." << endl;
+                return nullptr;
+            }
         }
-        if (table[hashing_method(key, size, i)].first == -1) {
-            return nullptr; // Si no se encontró el valor
+        if (table[index].first == -1) {
+            return nullptr;
         }
-        return &table[hashing_method(key, size, i)].second;
+        return &table[index].second;
     }
 };
 
+// Clase de tabla hash con direccionamiento abierto
 class HashTable_open_ID {
 private:
     int size;
@@ -72,6 +97,7 @@ public:
     void insert(long long int key, twitterUser user) {
         int index = h1(key, size);
         table[index].push_back(make_pair(key, user));
+        // cout << "Inserted key: " << key << " at index: " << index << " in open hash table" << endl;
     }
 
     twitterUser* search(long long int key) {

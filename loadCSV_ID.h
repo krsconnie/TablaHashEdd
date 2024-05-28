@@ -57,18 +57,18 @@ void loadCSV_Id(const std::string& filename, HashTable& hashtable, int max_users
 			}
 
 			twitterUser user = {uni, userName, since, std::stoi(numberTweets), std::stoi(followers), std::stoi(friends), userIdLong};
-			hashtable.insert(static_cast<int>(userIdLong), user);
+			hashtable.insert(user.userId, user);
 
-			// Imprimir los parámetros del usuario después de la inserción (por motivos de debug)
-			std::cout << "Usuario agregado: \n";
-			std::cout << "Universidad: " << uni << "\n";
-			std::cout << "ID de Usuario: " << userIdLong << "\n";
-			std::cout << "Nombre de Usuario: " << userName << "\n";
-			std::cout << "Número de Tweets: " << numberTweets << "\n";
-			std::cout << "Amigos: " << friends << "\n";
-			std::cout << "Seguidores: " << followers << "\n";
-			std::cout << "Desde: " << since << "\n";
-			std::cout << "------------------------\n";
+				// // Imprimir los parámetros del usuario después de la inserción (por motivos de debug)
+				// std::cout << "Usuario agregado: \n";
+				// std::cout << "Universidad: " << uni << "\n";
+				// std::cout << "ID de Usuario: " << userIdLong << "\n";
+				// std::cout << "Nombre de Usuario: " << userName << "\n";
+				// std::cout << "Número de Tweets: " << numberTweets << "\n";
+				// std::cout << "Amigos: " << friends << "\n";
+				// std::cout << "Seguidores: " << followers << "\n";
+				// std::cout << "Desde: " << since << "\n";
+				// std::cout << "------------------------\n";
 
 			users_added++;
 		}
