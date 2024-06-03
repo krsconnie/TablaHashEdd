@@ -9,6 +9,8 @@
         "chrono": "cpp",
         "iosfwd": "cpp",
         "fstream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "algorithm": "cpp"
     }
 }

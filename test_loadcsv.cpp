@@ -12,7 +12,7 @@ int main() {
     loadCSV_Id(filename, closedHashTable, 10);
 
     // Ejemplo de cómo encontrar e imprimir un usuario por ID (opcional)
-    int userID = 414942137; // Reemplazar con un ID de usuario del archivo CSV
+    long long userID = 424234324432423423; // Reemplazar con un ID de usuario del archivo CSV
     const twitterUser* user = closedHashTable.search(userID);
 
 

@@ -112,6 +112,16 @@ public:
         }
         return &table[index].second;
     }
+
+    /**
+     * Calcula el tamaño en bytes de la tabla hash.
+     * return Tamaño en bytes de la tabla hash.
+     */
+    size_t sizeInBytes() {
+        size_t sizeOfPair = sizeof(pair<long long int, twitterUser>);
+        size_t sizeOfVector = table.size() * sizeOfPair;
+        return sizeof(*this) + sizeOfVector;
+    }
 };
 
 /* Clase de tabla hash con direccionamiento abierto
@@ -152,5 +162,14 @@ public:
             if (pair.first == key) return &pair.second;
         }
         return nullptr;
+    }
+    /**
+     * Calcula el tamaño en bytes de la tabla hash.
+     * return Tamaño en bytes de la tabla hash.
+     */
+    size_t sizeInBytes() {
+        size_t sizeOfList = sizeof(list<pair<long long int, twitterUser>>);
+        size_t sizeOfVector = table.size() * sizeOfList;
+        return sizeof(*this) + sizeOfVector;
     }
 };
