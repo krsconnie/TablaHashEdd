@@ -4,21 +4,19 @@
 
 #include <iostream>
 #include <string>
+/* Estructura twitterUser
+ * Almacena la información de los usuarios de Twitter.
+ */
+struct twitterUser {
+    std::string university; // Universidad a la que siguen
+    std::string userName; // Nombre de usuario
+    std::string since; // Fecha de creación de la cuenta
 
-// Estructura de twitterUser para almacenar la info. de los usuarios
+    int numberTweets; // Número de tweets
+    int followers; // Número de seguidores
+    int friends; // Número de amigos
 
-struct twitterUser{
-
-	std::string university; // Universidad a la que siguen
-	std::string userName; // Nombre de usuario
-	std::string since; // Fecha de creación de la cuenta
-
-	int numberTweets; // Numero de tweets
-	int followers; // Numero de seguidores
-	int friends; // Numero de amigos
-
-	long long userId;
-
+    long long userId; // ID del usuario
 };
 
 #endif
