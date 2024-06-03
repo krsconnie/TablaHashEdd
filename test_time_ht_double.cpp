@@ -10,8 +10,7 @@
 using namespace std;
 int main(int argc, char* argv[]) {
     // Verificar si se proporcionan los argumentos correctos
-    if (argc < 2 || argc > 3) {
-        cerr << "Usage: " << argv[0] << " <numElementos> [n]" << endl;
+    if (argc != 2 || argc !=3) {
         return 1;
     }
     int inserts = stoi(argv[1]); // Tamaño de la tabla hash
