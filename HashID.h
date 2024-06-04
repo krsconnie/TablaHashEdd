@@ -24,7 +24,7 @@ int safe_modulo(int a, int b) {
  * return: valor de hash calculado
  */
 int h1(int k, int n) {
-    return safe_modulo(k * 7939, n);
+    return safe_modulo(k * 7937, n);
 }
 
 int h2(int k, int n) {
